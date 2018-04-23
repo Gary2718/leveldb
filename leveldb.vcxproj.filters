@@ -129,7 +129,7 @@
     <ClCompile Include="util\win_logger.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="maintest\maintets.cpp">
+    <ClCompile Include="demo\demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
