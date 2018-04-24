@@ -6,7 +6,6 @@
 #include <functional>
 #include <cctype>
 
-
 using std::cerr;
 using std::cout;
 using std::endl;
@@ -78,7 +77,6 @@ int main(int argc, char** argv) {
     cout << "updated value: " << value_update << endl;
 
     //delete
-    ldb::Slice del_vs("");
     string value_del = "";
     auto del_state = dbPtr1->Delete(write_options, "key_4444");
     cout << "Delete state: " << del_state.ToString() << endl;
@@ -87,6 +85,26 @@ int main(int argc, char** argv) {
 
 
 
+    ldb::Iterator * iter = dbPtr1->NewIterator(read_option1);
+    iter->SeekToFirst();
+    if ( iter->Valid() )
+    {
+        cout << "first key: " << iter->key().ToString() << "first value: " << iter->value().ToString() << endl;
+    }
+
+    iter->Seek("key_5555");
+    if ( iter->Valid() )
+    {
+        cout << "key_5555 key: " << iter->key().ToString() << "key_5555 value: " << iter->value().ToString() << endl;
+    }
+
+
+    ldb::Iterator * itr = dbPtr1->NewIterator(read_option1);
+    for (itr->SeekToFirst(); itr->Valid(); itr->Next())
+    {
+        cout << "key: " << itr->key().ToString() << "     value: " << itr->value().ToString() << endl;
+
+    }
 
     //destroy
     //ldb::DestroyDB( ldbPath1,open_Opts );
