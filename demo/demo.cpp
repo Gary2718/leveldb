@@ -19,10 +19,10 @@ int main(int argc, char** argv) {
     namespace ldb = leveldb;
 
     string ldbPath1("E:\\Github\\test\\ldb1");
-    string ldbPath2("E:\\Github\\test\\ldb2");
-    string ldbPath3("E:\\Github\\test\\ldb3");
+    //string ldbPath2("E:\\Github\\test\\ldb2");
+    //string ldbPath3("E:\\Github\\test\\ldb3");
     ldb::DB* dbPtr1 = nullptr;
-    ldb::DB* dbPtr2 = nullptr;
+    //ldb::DB* dbPtr2 = nullptr;
     ldb::Options open_Opts;
 //  open_Opts.comparator =
     open_Opts.create_if_missing = true;
@@ -30,6 +30,7 @@ int main(int argc, char** argv) {
 
     open_Opts.max_open_files = 64;
     open_Opts.compression = ldb::kNoCompression;
+    //open_Opts.compression = ldb::kSnappyCompression;
 
     //create/open a levelDB
     auto opendb_Stat = ldb::DB::Open(open_Opts, ldbPath1.c_str(), &dbPtr1);
@@ -83,7 +84,8 @@ int main(int argc, char** argv) {
     dbPtr1->Get(read_option1, "key_4444", &value_del);
     cout << "Delete value: " << value_del << endl;
 
-
+    
+    // Iterator manipunation
 
     ldb::Iterator * iter = dbPtr1->NewIterator(read_option1);
     iter->SeekToFirst();
